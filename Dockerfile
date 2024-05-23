@@ -1,9 +1,8 @@
-FROM openjdk:17-alpine
+FROM maven:3.8.5-openjdk-17 AS build
 COPY . .
-RUN ./mvnw clean install -DskipTests
+RUN mvn clean package -DskipTests
 
+FROM openjdk:17.0.1-jdk-slim
+COPY --from=build /target/fifa-cups-*.jar app.jar
 EXPOSE 8080
-
-COPY ./target/fifa-cups-*.jar app.jar
-
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
