@@ -11,6 +11,7 @@ import com.piriurna.fifacups.domain.dto.request.user.RegisterUserDTO;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 import com.piriurna.fifacups.service.UserService;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -20,7 +21,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping("/register")
-    public ResponseEntity<UserResponse> register(@RequestAttribute String uid, @RequestBody RegisterUserDTO data) {
+    public ResponseEntity<UserResponse> register(@RequestAttribute String uid, @Valid @RequestBody RegisterUserDTO data) {
         return service.register(uid, data);
     }
 }
