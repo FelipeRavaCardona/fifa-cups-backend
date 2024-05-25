@@ -1,5 +1,7 @@
 package com.piriurna.fifacups.repository;
 
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,5 +21,9 @@ public class TeamRepository {
     public TeamResponse saveReturnResponse(Team newTeam) {
         Team team = repo.save(newTeam);
         return mapper.map(team, TeamResponse.class);
+    }
+
+    public List<Team> findAllByIdReturnEntity(List<String> ids) {
+        return repo.findAllById(ids);
     }
 }

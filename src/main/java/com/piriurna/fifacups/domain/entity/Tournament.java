@@ -1,5 +1,6 @@
 package com.piriurna.fifacups.domain.entity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,9 +27,11 @@ import lombok.ToString;
 public class Tournament extends BaseEntity {
     private String name;
 
+    private LocalDateTime startDate;
+    
     @Enumerated(EnumType.STRING)
     private TournamentStatus status;
-    
+
     @ManyToOne
     private User owner;
 
@@ -55,10 +58,11 @@ public class Tournament extends BaseEntity {
         this.setId(UUID.randomUUID().toString());
     }
 
-    public Tournament(String name, User owner) {
+    public Tournament(String name, LocalDateTime startDate, User owner) {
         this.setId(UUID.randomUUID().toString());
         this.status = TournamentStatus.CONFIGURING;
         this.name = name;
         this.owner = owner;
+        this.startDate = startDate;
     }
 }
