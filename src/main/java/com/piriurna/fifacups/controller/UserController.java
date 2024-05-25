@@ -21,7 +21,7 @@ public class UserController {
     private UserService service;
 
     @PostMapping
-    public ResponseEntity<UserResponse> register(@RequestAttribute String uid, @Valid @RequestBody RegisterUserDTO data) {
-        return service.register(uid, data);
+    public ResponseEntity<UserResponse> register(@RequestAttribute String uid, @RequestAttribute String email, @Valid @RequestBody RegisterUserDTO data) {
+        return service.register(uid, email, data);
     }
 }

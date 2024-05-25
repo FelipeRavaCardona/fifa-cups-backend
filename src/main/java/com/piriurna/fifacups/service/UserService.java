@@ -19,8 +19,8 @@ import lombok.AllArgsConstructor;
 public class UserService {
     private UserRepository repo;
 
-    public ResponseEntity<UserResponse> register(String uid, RegisterUserDTO data) {
-        User newUser = new User(uid, data.getNickname(), data.getEmail());
+    public ResponseEntity<UserResponse> register(String uid, String email, RegisterUserDTO data) {
+        User newUser = new User(uid, data.getNickname(), email);
         try {
             UserResponse user = repo.saveReturnResponse(newUser);
             return new ResponseEntity<UserResponse>(user, HttpStatus.CREATED);

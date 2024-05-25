@@ -8,8 +8,4 @@ import lombok.Data;
 public class RegisterUserDTO {
     @NotBlank(message = "'nickname' is required")
     String nickname;
-
-    @Email(message = "'email' must be a valid email")
-    @NotBlank(message = "'email' is required")
-    String email;
 }
