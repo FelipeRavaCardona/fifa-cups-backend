@@ -25,7 +25,6 @@ public class UserService {
             UserResponse user = repo.saveReturnResponse(newUser);
             return new ResponseEntity<UserResponse>(user, HttpStatus.CREATED);
         } catch (DataIntegrityViolationException e) {
-            System.out.println(e);
             throw new DuplicateEntryException();
         } catch (Exception e) {
             throw new UnexpectedException();

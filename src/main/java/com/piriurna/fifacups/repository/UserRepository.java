@@ -20,4 +20,8 @@ public class UserRepository {
         User user = repo.save(newUser);
         return mapper.map(user, UserResponse.class);
     }
+
+    public User findByUidReturnEntity(String uid) {
+        return repo.findByUid(uid);
+    }
 }

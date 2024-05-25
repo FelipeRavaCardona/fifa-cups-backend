@@ -7,21 +7,21 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.piriurna.fifacups.domain.dto.request.user.RegisterUserDTO;
-import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
-import com.piriurna.fifacups.service.UserService;
+import com.piriurna.fifacups.domain.dto.request.team.CreateTeamDTO;
+import com.piriurna.fifacups.domain.dto.response.team.TeamResponse;
+import com.piriurna.fifacups.service.TeamService;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/team")
 @AllArgsConstructor
-public class UserController {
-    private UserService service;
+public class TeamController {
+    private TeamService service;
 
     @PostMapping
-    public ResponseEntity<UserResponse> register(@RequestAttribute String uid, @Valid @RequestBody RegisterUserDTO data) {
-        return service.register(uid, data);
+    public ResponseEntity<TeamResponse> create(@RequestAttribute String uid, @Valid @RequestBody CreateTeamDTO data) {
+        return service.create(uid, data);
     }
 }
