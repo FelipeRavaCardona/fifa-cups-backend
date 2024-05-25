@@ -23,3 +23,9 @@ module "ec2" {
     secrets_manager_arn = module.rds.secrets_manager_arn
     security_group_ids  = [ module.security_group.ec2_id ]
 }
+
+module "api_gateway" {
+    source = "./api_gateway"
+
+    public_dns = module.ec2.public_dns
+}
