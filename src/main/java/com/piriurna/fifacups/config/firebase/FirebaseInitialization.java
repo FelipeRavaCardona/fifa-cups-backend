@@ -20,7 +20,6 @@ public class FirebaseInitialization {
     public void initializeFirebase() {
         try {
             InputStream serviceAccount = FirebaseInitialization.class.getResourceAsStream(credentialsPath);
-            System.out.println(credentialsPath);
             FirebaseOptions option = FirebaseOptions.builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
                 .build();
