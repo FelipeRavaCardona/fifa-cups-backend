@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.piriurna.fifacups.domain.dto.request.user.RegisterUserDTO;
+import com.piriurna.fifacups.domain.dto.response.user.UserBasicResponse;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 import com.piriurna.fifacups.domain.entity.User;
 import com.piriurna.fifacups.exceptions.DuplicateEntryException;
@@ -29,5 +30,16 @@ public class UserService {
         } catch (Exception e) {
             throw new UnexpectedException();
         }
+    }
+
+    public ResponseEntity<UserBasicResponse> get(String uid, String email) {
+        UserBasicResponse user = repo.findByUidReturnBasicResponse(uid);
+
+        if (user == null) {
+            User newUser = new User(uid, email, email);
+            user = repo.saveReturnBasicResponse(newUser);
+        }
+            
+        return new ResponseEntity<UserBasicResponse>(user, HttpStatus.OK);
     }
 }
