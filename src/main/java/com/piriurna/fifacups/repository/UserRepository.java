@@ -29,7 +29,10 @@ public class UserRepository {
 
     public UserBasicResponse findByUidReturnBasicResponse(String uid) {
         User user = repo.findByUid(uid);
-        return mapper.map(user, UserBasicResponse.class);
+        if (user != null) {
+            return mapper.map(user, UserBasicResponse.class);
+        }
+        return null;
     }
 
     public User findByUidReturnEntity(String uid) {
