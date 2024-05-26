@@ -27,6 +27,8 @@ public class Match extends BaseEntity{
     private Team homeTeam;
     @ManyToOne
     private Team awayTeam;
+    @ManyToOne
+    private Team winnerTeam;
 
     @Enumerated(EnumType.STRING)
     private MatchStatus status;

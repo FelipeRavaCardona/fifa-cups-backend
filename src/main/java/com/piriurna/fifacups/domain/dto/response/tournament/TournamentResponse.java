@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.piriurna.fifacups.domain.dto.response.group.GroupResponse;
 import com.piriurna.fifacups.domain.dto.response.team.TeamResponse;
+import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class TournamentResponse {
     private String id;
     private String name;
     private String status;
-    private String ownerNickname;
+    private UserResponse owner;
     private LocalDateTime startDate;
     private List<TeamResponse> assignedTeams;
     private List<GroupResponse> groups;

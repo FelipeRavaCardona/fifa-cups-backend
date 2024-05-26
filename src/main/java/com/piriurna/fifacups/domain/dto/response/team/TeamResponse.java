@@ -1,6 +1,6 @@
 package com.piriurna.fifacups.domain.dto.response.team;
 
-import com.piriurna.fifacups.domain.dto.response.user.UserIdAndNicknameResponse;
+import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,5 +15,5 @@ public class TeamResponse {
     private String id;
     private String name;
     private String imageUrl;
-    private UserIdAndNicknameResponse owner;
+    private UserResponse owner;
 }

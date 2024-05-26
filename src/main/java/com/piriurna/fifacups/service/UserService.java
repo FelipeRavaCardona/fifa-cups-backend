@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.piriurna.fifacups.domain.dto.request.user.RegisterUserDTO;
 import com.piriurna.fifacups.domain.dto.request.user.UpdateUserDTO;
-import com.piriurna.fifacups.domain.dto.response.user.UserBasicResponse;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 import com.piriurna.fifacups.domain.entity.User;
 import com.piriurna.fifacups.exceptions.DuplicateEntryException;
@@ -33,21 +32,21 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<UserBasicResponse> get(String uid, String email) {
-        UserBasicResponse user = repo.findByUidReturnBasicResponse(uid);
+    public ResponseEntity<UserResponse> get(String uid, String email) {
+        UserResponse user = repo.findByUidReturnResponse(uid);
 
         if (user == null) {
             User newUser = new User(uid, email, email);
-            user = repo.saveReturnBasicResponse(newUser);
+            user = repo.saveReturnResponse(newUser);
         }
             
-        return new ResponseEntity<UserBasicResponse>(user, HttpStatus.OK);
+        return new ResponseEntity<UserResponse>(user, HttpStatus.OK);
     }
 
-    public ResponseEntity<UserBasicResponse> update(String uid, UpdateUserDTO data) {
+    public ResponseEntity<UserResponse> update(String uid, UpdateUserDTO data) {
         User user = repo.findByUidReturnEntity(uid);
         user.setNickname(data.getNickname());
-        UserBasicResponse updatedUser = repo.saveReturnBasicResponse(user);
-        return new ResponseEntity<UserBasicResponse>(updatedUser, HttpStatus.OK);
+        UserResponse updatedUser = repo.saveReturnResponse(user);
+        return new ResponseEntity<UserResponse>(updatedUser, HttpStatus.OK);
     }
 }

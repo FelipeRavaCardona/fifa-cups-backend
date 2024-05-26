@@ -3,7 +3,6 @@ package com.piriurna.fifacups.repository;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
-import com.piriurna.fifacups.domain.dto.response.user.UserBasicResponse;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 import com.piriurna.fifacups.domain.entity.User;
 import com.piriurna.fifacups.repository.interfaces.IUserRepo;
@@ -22,15 +21,10 @@ public class UserRepository {
         return mapper.map(user, UserResponse.class);
     }
 
-    public UserBasicResponse saveReturnBasicResponse(User newUser) {
-        User user = repo.save(newUser);
-        return mapper.map(user, UserBasicResponse.class);
-    }
-
-    public UserBasicResponse findByUidReturnBasicResponse(String uid) {
+    public UserResponse findByUidReturnResponse(String uid) {
         User user = repo.findByUid(uid);
         if (user != null) {
-            return mapper.map(user, UserBasicResponse.class);
+            return mapper.map(user, UserResponse.class);
         }
         return null;
     }

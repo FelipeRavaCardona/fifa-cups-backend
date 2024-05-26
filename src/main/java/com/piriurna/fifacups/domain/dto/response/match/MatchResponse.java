@@ -18,5 +18,6 @@ public class MatchResponse {
     private Integer awayScore;
     private TeamResponse homeTeam;
     private TeamResponse awayTeam;
+    private String winnerTeamId;
     private MatchStatus status;
 }
