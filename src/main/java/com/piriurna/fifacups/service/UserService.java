@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.piriurna.fifacups.domain.dto.request.user.RegisterUserDTO;
+import com.piriurna.fifacups.domain.dto.request.user.UpdateUserDTO;
 import com.piriurna.fifacups.domain.dto.response.user.UserBasicResponse;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
 import com.piriurna.fifacups.domain.entity.User;
@@ -41,5 +42,12 @@ public class UserService {
         }
             
         return new ResponseEntity<UserBasicResponse>(user, HttpStatus.OK);
+    }
+
+    public ResponseEntity<UserBasicResponse> update(String uid, UpdateUserDTO data) {
+        User user = repo.findByUidReturnEntity(uid);
+        user.setNickname(data.getNickname());
+        UserBasicResponse updatedUser = repo.saveReturnBasicResponse(user);
+        return new ResponseEntity<UserBasicResponse>(updatedUser, HttpStatus.OK);
     }
 }
