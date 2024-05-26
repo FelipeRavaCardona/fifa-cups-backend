@@ -21,7 +21,8 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String token = request.getHeader("Authorization");
         if (token == null) {
-            throw new UnauthorizedException("Missing Bearer Token");
+            sendErrorResponse(response, "Missing Bearer Token");
+            return;
         }
         token = token.split(" ")[1];
         
@@ -30,11 +31,13 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
         try {
             decodedToken = FirebaseAuth.getInstance().verifyIdToken(token);
         } catch (FirebaseAuthException e) {
-            throw new UnauthorizedException("Error: " + e.toString());
+            sendErrorResponse(response, "Error: " + e.getMessage());
+            return;
         }
 
         if (decodedToken == null) {
-            throw new UnauthorizedException("Invalid Bearer Token");
+            sendErrorResponse(response, "Invalid Bearer Token");
+            return;
         }
 
         String uid = decodedToken.getUid();
@@ -44,5 +47,11 @@ public class FirebaseTokenFilter extends OncePerRequestFilter {
         request.setAttribute("email", email);
         
         chain.doFilter(request, response);
+    }
+
+    private void sendErrorResponse(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"message\": \"" + message + "\"}");
     }
 }
