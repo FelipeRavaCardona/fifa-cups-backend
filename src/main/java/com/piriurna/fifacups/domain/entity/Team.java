@@ -8,6 +8,7 @@ import com.piriurna.fifacups.domain.entity.interfaces.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,8 +27,8 @@ public class Team extends BaseEntity {
     @ManyToMany(mappedBy = "assignedTeams")
     private List<Tournament> tournaments;
 
-    @ManyToMany(mappedBy = "groupTeams")
-    private List<Group> groups;
+    @OneToMany(mappedBy = "team")
+    private List<GroupTeamInfo> groups;
 
     @ManyToMany
     private List<Tournament> entryRequests;

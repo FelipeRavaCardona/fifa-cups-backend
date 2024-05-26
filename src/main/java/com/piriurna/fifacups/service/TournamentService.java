@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.piriurna.fifacups.domain.dto.request.tournament.CreateTournamentDTO;
 import com.piriurna.fifacups.domain.dto.response.tournament.TournamentResponse;
 import com.piriurna.fifacups.domain.entity.Group;
+import com.piriurna.fifacups.domain.entity.Match;
 import com.piriurna.fifacups.domain.entity.Team;
 import com.piriurna.fifacups.domain.entity.Tournament;
 import com.piriurna.fifacups.exceptions.UnexpectedException;
@@ -30,6 +31,7 @@ public class TournamentService {
         Tournament newTournament = new Tournament(data.getName(), data.getStartDate(), userRepo.findByUidReturnEntity(uid));
         newTournament.setEntryRequests(new ArrayList<Team>());
         newTournament.setGroups(new ArrayList<Group>());
+        newTournament.setKnockOutMatches(new ArrayList<Match>());
         if (data.getTeamsIds() != null) {
             List<Team> teams = new ArrayList<Team>(teamRepo.findAllByIdReturnEntity(data.getTeamsIds()));
             newTournament.setAssignedTeams(teams);

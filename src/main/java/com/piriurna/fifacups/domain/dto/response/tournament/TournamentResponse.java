@@ -6,6 +6,7 @@ import java.util.List;
 import com.piriurna.fifacups.domain.dto.response.group.GroupResponse;
 import com.piriurna.fifacups.domain.dto.response.team.TeamResponse;
 import com.piriurna.fifacups.domain.dto.response.user.UserResponse;
+import com.piriurna.fifacups.domain.entity.Match;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,4 +26,5 @@ public class TournamentResponse {
     private List<TeamResponse> assignedTeams;
     private List<GroupResponse> groups;
     private List<TeamResponse> entryResquests;
+    private List<Match> knockOutMatches;
 }
