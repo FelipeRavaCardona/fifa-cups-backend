@@ -1,5 +1,7 @@
 package com.piriurna.fifacups.repository;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
 import com.piriurna.fifacups.config.modelMapper.TournamentMapper;
@@ -19,5 +21,9 @@ public class TournamentRepository {
     public TournamentResponse saveReturnResponse(Tournament newTournament) {
         Tournament tournament = repo.save(newTournament);
         return mapper.mapToResponse(tournament);
+    }
+
+    public Optional<Tournament> findByIdReturnEntity(String id) {
+        return repo.findById(id);
     }
 }

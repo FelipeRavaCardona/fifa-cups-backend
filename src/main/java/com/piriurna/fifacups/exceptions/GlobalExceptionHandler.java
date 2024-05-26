@@ -21,6 +21,16 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<MessageResponse>(new MessageResponse(ex.getBindingResult().getAllErrors().get(0).getDefaultMessage()), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<MessageResponse> notFoundExceptionHandler(NotFoundException ex) {
+        return new ResponseEntity<MessageResponse>(new MessageResponse(ex.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<MessageResponse> forbiddenExceptionHandler(ForbiddenException ex) {
+        return new ResponseEntity<MessageResponse>(new MessageResponse(ex.getMessage()), HttpStatus.FORBIDDEN);
+    }
+
     @ExceptionHandler(UnexpectedException.class)
     public ResponseEntity<MessageResponse> unexpectedExceptionHandler(UnexpectedException ex) {
         return new ResponseEntity<MessageResponse>(new MessageResponse(ex.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
